@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assessment - Course Finder</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Assessment</h1>
+    <form id="quizForm">
+      <div id="questions"></div>
+      <button type="submit" class="btn">Submit</button>
+    </form>
+  </div>
+
+  <script>
+    const questions = [
+      "Which subject do you enjoy the most?",
+      "How do you prefer solving problems?",
+      "What motivates you in learning?",
+      "Which activity do you enjoy most?",
+      "What type of work environment do you prefer?",
+      "How do you handle challenges?",
+      "Which skill do you want to improve?",
+      "What role do you take in a group?",
+      "What kind of books/articles do you enjoy?",
+      "What impact do you want to make?"
+    ];
+
+    const choices = [
+      ["Math", "Science", "Literature", "Arts"],
+      ["Logical thinking", "Experimentation", "Creativity", "Communication"],
+      ["Innovation", "Discovery", "Expression", "Helping others"],
+      ["Coding", "Lab experiments", "Writing", "Volunteering"],
+      ["Structured", "Research-based", "Flexible/creative", "Interactive/social"],
+      ["Analyze deeply", "Test different methods", "Think outside the box", "Talk with others"],
+      ["Critical thinking", "Research skills", "Artistic skills", "Public speaking"],
+      ["Leader", "Analyst", "Creative thinker", "Supporter"],
+      ["Science journals", "Tech blogs", "Poetry/novels", "Social issues"],
+      ["Advance technology", "Improve healthcare", "Create art", "Educate/inspire others"]
+    ];
+
+    const suggestions = {
+      Math: "Engineering",
+      Science: "Medicine",
+      Literature: "Education",
+      Arts: "Fine Arts",
+      "Logical thinking": "Computer Science",
+      Experimentation: "Biology/Chemistry",
+      Creativity: "Media & Communication",
+      Communication: "Teaching/Journalism",
+      Innovation: "IT/Engineering",
+      Discovery: "Sciences",
+      Expression: "Arts & Humanities",
+      "Helping others": "Education/Social Work"
+    };
+
+    const questionContainer = document.getElementById("questions");
+
+    questions.forEach((q, i) => {
+      let block = document.createElement("div");
+      block.classList.add("question-block");
+      block.innerHTML = `<p>${i+1}. ${q}</p>`;
+      choices[i].forEach(choice => {
+        block.innerHTML += `
+          <label>
+            <input type="radio" name="q${i}" value="${choice}" required>
+            ${choice}
+          </label><br>
+        `;
+      });
+      questionContainer.appendChild(block);
+    });
+
+    document.getElementById("quizForm").addEventListener("submit", function(e){
+      e.preventDefault();
+      const answers = [];
+      for(let i=0;i<questions.length;i++){
+        const val = document.querySelector(`input[name="q${i}"]:checked`).value;
+        answers.push(val);
+      }
+
+      // Find most frequent answer type
+      let counts = {};
+      answers.forEach(a => counts[a] = (counts[a]||0)+1);
+      let topAnswer = Object.keys(counts).reduce((a,b)=> counts[a]>counts[b]?a:b);
+
+      let course = suggestions[topAnswer] || "General Studies";
+
+      // Save to localStorage
+      let results = JSON.parse(localStorage.getItem("results")) || [];
+      results.unshift({date: new Date().toLocaleString(), course});
+      localStorage.setItem("results", JSON.stringify(results));
+
+      alert("Your suggested course is: " + course);
+      window.location.href = "result.html";
+    });
+  </script>
+</body>
+</html>

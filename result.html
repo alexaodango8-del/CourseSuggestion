@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Results - Course Finder</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Past Results</h1>
+    <ul id="resultList"></ul>
+    <a href="index.html" class="btn">Back to Home</a>
+  </div>
+
+  <script>
+    const resultList = document.getElementById("resultList");
+    let results = JSON.parse(localStorage.getItem("results")) || [];
+    if(results.length === 0){
+      resultList.innerHTML = "<p>No results yet. Take the assessment!</p>";
+    } else {
+      results.forEach(r=>{
+        let li = document.createElement("li");
+        li.textContent = `${r.date} - Suggested Course: ${r.course}`;
+        resultList.appendChild(li);
+      });
+    }
+  </script>
+</body>
+</html>
