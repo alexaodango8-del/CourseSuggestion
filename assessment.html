@@ -16,58 +16,39 @@
   </div>
 
   <script>
+    // Questions grouped by categories
     const questions = [
-      "Which subject do you enjoy the most?",
-      "How do you prefer solving problems?",
-      "What motivates you in learning?",
-      "Which activity do you enjoy most?",
-      "What type of work environment do you prefer?",
-      "How do you handle challenges?",
-      "Which skill do you want to improve?",
-      "What role do you take in a group?",
-      "What kind of books/articles do you enjoy?",
-      "What impact do you want to make?"
+      { text: "I enjoy sworking with tools, machines, or fixing things.", category: "Technology" },
+      { text: "I like solving puzzles, analyzing data, or doing experiments.", category: "Science" },
+      { text: "I like writing stories, drawing, singing, or creating something new.", category: "Arts" },
+      { text: "I enjoy helping others, teaching, or volunteering.", category: "Education" },
+      { text: "I like leading teams, selling products, or persuading people.", category: "Technology" },
+      { text: "I prefer organizing files, working with numbers, or following clear rules.", category: "Science" },
+      { text: "I get more energy from being with people than being alone.", category: "Arts" },
+      { text: "I make decisions based more on logic than emotions.", category: "Education" },
+      { text: "I like planning things step by step instead of being spontaneous.", category: "Technology" },
+      { text: "I often imagine new ideas and possibilities for the future.", category: "Arts" }
     ];
 
     const choices = [
-      ["Math", "Science", "Literature", "Arts"],
-      ["Logical thinking", "Experimentation", "Creativity", "Communication"],
-      ["Innovation", "Discovery", "Expression", "Helping others"],
-      ["Coding", "Lab experiments", "Writing", "Volunteering"],
-      ["Structured", "Research-based", "Flexible/creative", "Interactive/social"],
-      ["Analyze deeply", "Test different methods", "Think outside the box", "Talk with others"],
-      ["Critical thinking", "Research skills", "Artistic skills", "Public speaking"],
-      ["Leader", "Analyst", "Creative thinker", "Supporter"],
-      ["Science journals", "Tech blogs", "Poetry/novels", "Social issues"],
-      ["Advance technology", "Improve healthcare", "Create art", "Educate/inspire others"]
+      { text: "Strongly Agree", value: 4 },
+      { text: "Agree", value: 3 },
+      { text: "Neutral", value: 2 },
+      { text: "Disagree", value: 1 }
     ];
-
-    const suggestions = {
-      Math: "Engineering",
-      Science: "Medicine",
-      Literature: "Education",
-      Arts: "Fine Arts",
-      "Logical thinking": "Computer Science",
-      Experimentation: "Biology/Chemistry",
-      Creativity: "Media & Communication",
-      Communication: "Teaching/Journalism",
-      Innovation: "IT/Engineering",
-      Discovery: "Sciences",
-      Expression: "Arts & Humanities",
-      "Helping others": "Education/Social Work"
-    };
 
     const questionContainer = document.getElementById("questions");
 
+    // Render questions
     questions.forEach((q, i) => {
       let block = document.createElement("div");
       block.classList.add("question-block");
-      block.innerHTML = `<p>${i+1}. ${q}</p>`;
-      choices[i].forEach(choice => {
+      block.innerHTML = `<p>${i+1}. ${q.text}</p>`;
+      choices.forEach(choice => {
         block.innerHTML += `
           <label>
-            <input type="radio" name="q${i}" value="${choice}" required>
-            ${choice}
+            <input type="radio" name="q${i}" value="${choice.value}" data-category="${q.category}" required>
+            ${choice.text}
           </label><br>
         `;
       });
@@ -76,18 +57,29 @@
 
     document.getElementById("quizForm").addEventListener("submit", function(e){
       e.preventDefault();
-      const answers = [];
+
+      // Track category scores
+      let scores = { Technology: 0, Science: 0, Arts: 0, Education: 0 };
+
       for(let i=0;i<questions.length;i++){
-        const val = document.querySelector(`input[name="q${i}"]:checked`).value;
-        answers.push(val);
+        const selected = document.querySelector(`input[name="q${i}"]:checked`);
+        const category = selected.dataset.category;
+        const value = parseInt(selected.value);
+        scores[category] += value;
       }
 
-      // Find most frequent answer type
-      let counts = {};
-      answers.forEach(a => counts[a] = (counts[a]||0)+1);
-      let topAnswer = Object.keys(counts).reduce((a,b)=> counts[a]>counts[b]?a:b);
+      // Find top category
+      let topCategory = Object.keys(scores).reduce((a,b) => scores[a] > scores[b] ? a : b);
 
-      let course = suggestions[topAnswer] || "General Studies";
+      // Suggested courses based on top category
+      const suggestions = {
+        Technology: "Computer Science, Engineering, or IT",
+        Science: "Nursing, Medicine, or Biology",
+        Arts: "Fine Arts, Design, or Media Studies",
+        Education: "Education, Psychology, or Social Work"
+      };
+
+      let course = suggestions[topCategory];
 
       // Save to localStorage
       let results = JSON.parse(localStorage.getItem("results")) || [];
@@ -100,3 +92,4 @@
   </script>
 </body>
 </html>
+
