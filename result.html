@@ -16,12 +16,13 @@
   <script>
     const resultList = document.getElementById("resultList");
     let results = JSON.parse(localStorage.getItem("results")) || [];
+    
     if(results.length === 0){
       resultList.innerHTML = "<p>No results yet. Take the assessment!</p>";
     } else {
-      results.forEach(r=>{
+      results.forEach(r => {
         let li = document.createElement("li");
-        li.textContent = `${r.date} - Suggested Course: ${r.course}`;
+        li.textContent = `${r.date}, ${r.time}, ${r.course}`;
         resultList.appendChild(li);
       });
     }
