@@ -8,86 +8,134 @@
 </head>
 <body>
   <div class="container">
-    <h1>Assessment</h1>
-    <form id="quizForm">
-      <div id="questions"></div>
+    <h1>Course Assessment</h1>
+    <form id="assessmentForm">
+      
+      <p>1. I enjoy working with tools, machines, or fixing things.</p>
+      <label><input type="radio" name="q1" value="Realistic"> Strongly Agree</label>
+      <label><input type="radio" name="q1" value="Realistic"> Agree</label>
+      <label><input type="radio" name="q1" value="Neutral"> Neutral</label>
+      <label><input type="radio" name="q1" value="Other"> Disagree</label>
+
+      <p>2. I like solving puzzles, analyzing data, or doing experiments.</p>
+      <label><input type="radio" name="q2" value="Investigative"> Strongly Agree</label>
+      <label><input type="radio" name="q2" value="Investigative"> Agree</label>
+      <label><input type="radio" name="q2" value="Neutral"> Neutral</label>
+      <label><input type="radio" name="q2" value="Other"> Disagree</label>
+
+      <p>3. I like writing stories, drawing, singing, or creating something new.</p>
+      <label><input type="radio" name="q3" value="Artistic"> Strongly Agree</label>
+      <label><input type="radio" name="q3" value="Artistic"> Agree</label>
+      <label><input type="radio" name="q3" value="Neutral"> Neutral</label>
+      <label><input type="radio" name="q3" value="Other"> Disagree</label>
+
+      <p>4. I enjoy helping others, teaching, or volunteering.</p>
+      <label><input type="radio" name="q4" value="Social"> Strongly Agree</label>
+      <label><input type="radio" name="q4" value="Social"> Agree</label>
+      <label><input type="radio" name="q4" value="Neutral"> Neutral</label>
+      <label><input type="radio" name="q4" value="Other"> Disagree</label>
+
+      <p>5. I like leading teams, selling products, or persuading people.</p>
+      <label><input type="radio" name="q5" value="Enterprising"> Strongly Agree</label>
+      <label><input type="radio" name="q5" value="Enterprising"> Agree</label>
+      <label><input type="radio" name="q5" value="Neutral"> Neutral</label>
+      <label><input type="radio" name="q5" value="Other"> Disagree</label>
+
+      <p>6. I prefer organizing files, working with numbers, or following clear rules.</p>
+      <label><input type="radio" name="q6" value="Conventional"> Strongly Agree</label>
+      <label><input type="radio" name="q6" value="Conventional"> Agree</label>
+      <label><input type="radio" name="q6" value="Neutral"> Neutral</label>
+      <label><input type="radio" name="q6" value="Other"> Disagree</label>
+
+      <p>7. I get more energy from being with people than being alone.</p>
+      <label><input type="radio" name="q7" value="Social"> Strongly Agree</label>
+      <label><input type="radio" name="q7" value="Social"> Agree</label>
+      <label><input type="radio" name="q7" value="Neutral"> Neutral</label>
+      <label><input type="radio" name="q7" value="Other"> Disagree</label>
+
+      <p>8. I make decisions based more on logic than emotions.</p>
+      <label><input type="radio" name="q8" value="Investigative"> Strongly Agree</label>
+      <label><input type="radio" name="q8" value="Investigative"> Agree</label>
+      <label><input type="radio" name="q8" value="Neutral"> Neutral</label>
+      <label><input type="radio" name="q8" value="Other"> Disagree</label>
+
+      <p>9. I like planning things step by step instead of being spontaneous.</p>
+      <label><input type="radio" name="q9" value="Conventional"> Strongly Agree</label>
+      <label><input type="radio" name="q9" value="Conventional"> Agree</label>
+      <label><input type="radio" name="q9" value="Neutral"> Neutral</label>
+      <label><input type="radio" name="q9" value="Other"> Disagree</label>
+
+      <p>10. I often imagine new ideas and possibilities for the future.</p>
+      <label><input type="radio" name="q10" value="Artistic"> Strongly Agree</label>
+      <label><input type="radio" name="q10" value="Artistic"> Agree</label>
+      <label><input type="radio" name="q10" value="Neutral"> Neutral</label>
+      <label><input type="radio" name="q10" value="Other"> Disagree</label>
+
+      <br><br>
       <button type="submit" class="btn">Submit</button>
     </form>
+    <a href="index.html" class="btn">Back to Home</a>
   </div>
 
   <script>
-    // Questions grouped by categories
-    const questions = [
-      { text: "I enjoy sworking with tools, machines, or fixing things.", category: "Technology" },
-      { text: "I like solving puzzles, analyzing data, or doing experiments.", category: "Science" },
-      { text: "I like writing stories, drawing, singing, or creating something new.", category: "Arts" },
-      { text: "I enjoy helping others, teaching, or volunteering.", category: "Education" },
-      { text: "I like leading teams, selling products, or persuading people.", category: "Technology" },
-      { text: "I prefer organizing files, working with numbers, or following clear rules.", category: "Science" },
-      { text: "I get more energy from being with people than being alone.", category: "Arts" },
-      { text: "I make decisions based more on logic than emotions.", category: "Education" },
-      { text: "I like planning things step by step instead of being spontaneous.", category: "Technology" },
-      { text: "I often imagine new ideas and possibilities for the future.", category: "Arts" }
-    ];
+    const form = document.getElementById("assessmentForm");
 
-    const choices = [
-      { text: "Strongly Agree", value: 4 },
-      { text: "Agree", value: 3 },
-      { text: "Neutral", value: 2 },
-      { text: "Disagree", value: 1 }
-    ];
-
-    const questionContainer = document.getElementById("questions");
-
-    // Render questions
-    questions.forEach((q, i) => {
-      let block = document.createElement("div");
-      block.classList.add("question-block");
-      block.innerHTML = `<p>${i+1}. ${q.text}</p>`;
-      choices.forEach(choice => {
-        block.innerHTML += `
-          <label>
-            <input type="radio" name="q${i}" value="${choice.value}" data-category="${q.category}" required>
-            ${choice.text}
-          </label><br>
-        `;
-      });
-      questionContainer.appendChild(block);
-    });
-
-    document.getElementById("quizForm").addEventListener("submit", function(e){
-      e.preventDefault();
-
-      // Track category scores
-      let scores = { Technology: 0, Science: 0, Arts: 0, Education: 0 };
-
-      for(let i=0;i<questions.length;i++){
-        const selected = document.querySelector(`input[name="q${i}"]:checked`);
-        const category = selected.dataset.category;
-        const value = parseInt(selected.value);
-        scores[category] += value;
-      }
-
-      // Find top category
-      let topCategory = Object.keys(scores).reduce((a,b) => scores[a] > scores[b] ? a : b);
-
-      // Suggested courses based on top category
-      const suggestions = {
-        Technology: "Computer Science, Engineering, or IT",
-        Science: "Nursing, Medicine, or Biology",
-        Arts: "Fine Arts, Design, or Media Studies",
-        Education: "Education, Psychology, or Social Work"
+    function saveResult(suggestedCourse) {
+      let now = new Date();
+      let result = {
+        date: now.toLocaleDateString(),
+        time: now.toLocaleTimeString(),
+        course: suggestedCourse
       };
 
-      let course = suggestions[topCategory];
-
-      // Save to localStorage
       let results = JSON.parse(localStorage.getItem("results")) || [];
-      results.unshift({date: new Date().toLocaleString(), course});
-      localStorage.setItem("results", JSON.stringify(results));
+      results.push(result);
 
-      alert("Your suggested course is: " + course);
-      window.location.href = "result.html";
+      localStorage.setItem("results", JSON.stringify(results));
+    }
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      // count category scores
+      let categories = {
+        Realistic: 0,
+        Investigative: 0,
+        Artistic: 0,
+        Social: 0,
+        Enterprising: 0,
+        Conventional: 0
+      };
+
+      for (let i = 1; i <= 10; i++) {
+        let answer = document.querySelector(`input[name="q${i}"]:checked`);
+        if (answer && categories.hasOwnProperty(answer.value)) {
+          categories[answer.value]++;
+        }
+      }
+
+      // find top category
+      let topCategory = Object.keys(categories).reduce((a, b) =>
+        categories[a] > categories[b] ? a : b
+      );
+
+      // map category to course
+      let courseMap = {
+        Realistic: "Bachelor of Science in Engineering / Automotive Technology",
+        Investigative: "Bachelor of Science in Information Technology / Biology / Chemistry",
+        Artistic: "Bachelor of Arts in Communication / Fine Arts / Music",
+        Social: "Bachelor of Secondary Education / Psychology / Nursing",
+        Enterprising: "Bachelor of Science in Business Administration / Marketing",
+        Conventional: "Bachelor of Science in Accountancy / Office Administration"
+      };
+
+      let suggestedCourse = courseMap[topCategory] || "General Studies";
+
+      // save result with date + time
+      saveResult(suggestedCourse);
+
+      alert(`Your suggested course is: ${suggestedCourse}`);
+      window.location.href = "results.html";
     });
   </script>
 </body>
