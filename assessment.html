@@ -10,6 +10,7 @@
   <div class="container">
     <h1>Course Assessment</h1>
     <form id="assessmentForm">
+      <h1>Welcome, <span id="displayUser"></span>!</h1>
       
       <p>1. I enjoy working with tools, machines, or fixing things.</p>
       <label><input type="radio" name="q1" value="Realistic"> Strongly Agree</label>
@@ -78,68 +79,76 @@
   </div>
 
   <script>
-    const form = document.getElementById("assessmentForm");
+  const form = document.getElementById("assessmentForm");
+  const currentUser = localStorage.getItem("currentUser");
 
-    function saveResult(suggestedCourse) {
-      let now = new Date();
-      let result = {
-        date: now.toLocaleDateString(),
-        time: now.toLocaleTimeString(),
-        course: suggestedCourse
-      };
+  if (!currentUser) {
+    window.location.href = "index.html"; // force login if no user
+  } else {
+    document.getElementById("displayUser").innerText = currentUser;
+  }
 
-      let results = JSON.parse(localStorage.getItem("results")) || [];
-      results.push(result);
+  function saveResult(suggestedCourse) {
+    let now = new Date();
+    let result = {
+      date: now.toLocaleDateString(),
+      time: now.toLocaleTimeString(),
+      course: suggestedCourse
+    };
 
-      localStorage.setItem("results", JSON.stringify(results));
+    // save results for each user
+    let userResults = JSON.parse(localStorage.getItem(currentUser)) || [];
+    userResults.push(result);
+    localStorage.setItem(currentUser, JSON.stringify(userResults));
+  }
+
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    // count category scores
+    let categories = {
+      Realistic: 0,
+      Investigative: 0,
+      Artistic: 0,
+      Social: 0,
+      Enterprising: 0,
+      Conventional: 0
+    };
+
+    for (let i = 1; i <= 10; i++) {
+      let answer = document.querySelector(`input[name="q${i}"]:checked`);
+      if (answer && categories.hasOwnProperty(answer.value)) {
+        categories[answer.value]++;
+      }
     }
 
-    form.addEventListener("submit", function(e) {
-      e.preventDefault();
+    // find top category
+    let topCategory = Object.keys(categories).reduce((a, b) =>
+      categories[a] > categories[b] ? a : b
+    );
 
-      // count category scores
-      let categories = {
-        Realistic: 0,
-        Investigative: 0,
-        Artistic: 0,
-        Social: 0,
-        Enterprising: 0,
-        Conventional: 0
-      };
+    // map category to course
+    let courseMap = {
+      Realistic: "Engineering / Architecture / Electronics / Industrial Technology",
+      Investigative: "Biology / Chemistry / Physics / Mathematics / Information Technology",
+      Artistic: "Multimedia Arts / Communication / Journalism / Fine Arts / Creative Writing",
+      Social: "Education / Nursing / Social Work / Psychology / Tourism / Hospitality / Public Relations",
+      Enterprising: "Business Administration / Marketing / Entrepreneurship / Public Administration",
+      Conventional: "Accountancy / Finance / Office Administration / Criminology / Library Science"
+    };
 
-      for (let i = 1; i <= 10; i++) {
-        let answer = document.querySelector(`input[name="q${i}"]:checked`);
-        if (answer && categories.hasOwnProperty(answer.value)) {
-          categories[answer.value]++;
-        }
-      }
+    let suggestedCourse = courseMap[topCategory] || "General Studies";
 
-      // find top category
-      let topCategory = Object.keys(categories).reduce((a, b) =>
-        categories[a] > categories[b] ? a : b
-      );
+    // save result to localStorage under current user
+    saveResult(suggestedCourse);
 
-      // map category to course
-      let courseMap = {
-        Realistic: "Engineering / Architecture / Electronics / Industrial Technology",
-        Investigative: "Biology / Chemistry / Physics / Mathematics / Information Technology",
-        Artistic: "Multimedia Arts / Communication / Journalism / Fine Arts / Creative Writing",
-        Social: "Education, Nursing / Social Work / Psychology / Tourism  / Hospitality / Public Relations",
-        Enterprising: "Business Administration / Marketing / Entrepreneurship / Public Administration",
-        Conventional: "Accountancy / Finance / Office Administration / Criminology / Library Science"
-      };
-
-      let suggestedCourse = courseMap[topCategory] || "General Studies";
-
-      // save result with date + time
-      saveResult(suggestedCourse);
-
-      alert(`The course that fits for you: ${suggestedCourse}`);
-      window.location.href = "result.html";
-    });
-  </script>
+    alert(`The course that fits for you: ${suggestedCourse}`);
+    window.location.href = "result.html"; // redirect to results page
+  });
+</script>
 </body>
 </html>
+
 
 
 
