@@ -3,28 +3,41 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Results - Course Finder</title>
+  <title>Results</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Past Results</h1>
-    <ul id="resultList"></ul>
-    <a href="index.html" class="btn">Back to Home</a>
+  <div class="container" id="resultsPage">
+    <h1>Results for <span id="resultUser"></span></h1>
+    <table>
+      <tr><th>Question</th><th>Answer</th></tr>
+      <tbody id="resultsTable"></tbody>
+    </table>
+    <button class="btn" onclick="logout()">Logout</button>
   </div>
 
   <script>
-    const resultList = document.getElementById("resultList");
-    let results = JSON.parse(localStorage.getItem("results")) || [];
-    
-    if(results.length === 0){
-      resultList.innerHTML = "<p>No results yet. Take the assessment!</p>";
-    } else {
-      results.forEach(r => {
-        let li = document.createElement("li");
-        li.textContent = `${r.date}, ${r.time}, ${r.course}`;
-        resultList.appendChild(li);
+    const currentUser = localStorage.getItem("currentUser");
+    if (!currentUser) {
+      window.location.href = "index.html"; // back to login if no user
+    }
+
+    document.getElementById("resultUser").innerText = currentUser;
+
+    const results = JSON.parse(localStorage.getItem(currentUser));
+    const tableBody = document.getElementById("resultsTable");
+
+    if (results) {
+      Object.entries(results).forEach(([q, ans]) => {
+        tableBody.innerHTML += `<tr><td>${q}</td><td>${ans}</td></tr>`;
       });
+    } else {
+      tableBody.innerHTML = `<tr><td colspan="2">No results yet.</td></tr>`;
+    }
+
+    function logout() {
+      localStorage.removeItem("currentUser");
+      window.location.href = "index.html";
     }
   </script>
 </body>
