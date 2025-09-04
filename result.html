@@ -3,42 +3,56 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Results</title>
+  <title>Results - Course Finder</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container" id="resultsPage">
-    <h1>Results for <span id="resultUser"></span></h1>
-    <table>
-      <tr><th>Question</th><th>Answer</th></tr>
-      <tbody id="resultsTable"></tbody>
-    </table>
-    <button class="btn" onclick="logout()">Logout</button>
+  <div class="container">
+    <h1>Your Results</h1>
+    <h2>Welcome, <span id="displayUser"></span>!</h2>
+    
+    <div id="resultsList"></div>
+    
+    <br>
+    <a href="assessment.html" class="btn">Take Assessment Again</a>
+    <a href="index.html" class="btn" onclick="logout()">Logout</a>
   </div>
 
   <script>
     const currentUser = localStorage.getItem("currentUser");
+
     if (!currentUser) {
-      window.location.href = "index.html"; // back to login if no user
+      window.location.href = "index.html"; // force login if not logged in
+    } else {
+      document.getElementById("displayUser").innerText = currentUser;
     }
 
-    document.getElementById("resultUser").innerText = currentUser;
+    function loadResults() {
+      let userResults = JSON.parse(localStorage.getItem(currentUser)) || [];
 
-    const results = JSON.parse(localStorage.getItem(currentUser));
-    const tableBody = document.getElementById("resultsTable");
+      const resultsDiv = document.getElementById("resultsList");
 
-    if (results) {
-      Object.entries(results).forEach(([q, ans]) => {
-        tableBody.innerHTML += `<tr><td>${q}</td><td>${ans}</td></tr>`;
+      if (userResults.length === 0) {
+        resultsDiv.innerHTML = "<p>No results found yet. Please take the assessment.</p>";
+        return;
+      }
+
+      let html = "<ul>";
+      userResults.forEach(r => {
+        html += `<li><strong>${r.date} ${r.time}</strong>: ${r.course}</li>`;
       });
-    } else {
-      tableBody.innerHTML = `<tr><td colspan="2">No results yet.</td></tr>`;
+      html += "</ul>";
+
+      resultsDiv.innerHTML = html;
     }
 
     function logout() {
       localStorage.removeItem("currentUser");
-      window.location.href = "index.html";
     }
+
+    // load results on page load
+    loadResults();
   </script>
 </body>
 </html>
+
