@@ -121,12 +121,12 @@
 
       // map category to course
       let courseMap = {
-        Realistic: "Bachelor of Science in Engineering / Automotive Technology",
-        Investigative: "Bachelor of Science in Information Technology / Biology / Chemistry",
-        Artistic: "Bachelor of Arts in Communication / Fine Arts / Music",
-        Social: "Bachelor of Secondary Education / Psychology / Nursing",
-        Enterprising: "Bachelor of Science in Business Administration / Marketing",
-        Conventional: "Bachelor of Science in Accountancy / Office Administration"
+        Realistic: "Engineering / Architecture / Electronics / Industrial Technology",
+        Investigative: "Biology / Chemistry / Physics / Mathematics / Information Technology",
+        Artistic: "Multimedia Arts / Communication / Journalism / Fine Arts / Creative Writing",
+        Social: "Education, Nursing / Social Work / Psychology / Tourism  / Hospitality / Public Relations",
+        Enterprising: "Business Administration / Marketing / Entrepreneurship / Public Administration",
+        Conventional: "Accountancy / Finance / Office Administration / Criminology / Library Science"
       };
 
       let suggestedCourse = courseMap[topCategory] || "General Studies";
@@ -134,10 +134,11 @@
       // save result with date + time
       saveResult(suggestedCourse);
 
-      alert(`Your suggested course is: ${suggestedCourse}`);
+      alert(`The course that fits for you: ${suggestedCourse}`);
       window.location.href = "results.html";
     });
   </script>
 </body>
 </html>
+
 
