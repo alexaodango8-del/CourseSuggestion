@@ -105,7 +105,7 @@
   form.addEventListener("submit", function(e) {
     e.preventDefault();
 
-    // count category scores
+    let allDisagree = true; // flag for all "Disagree"
     let categories = {
       Realistic: 0,
       Investigative: 0,
@@ -117,17 +117,27 @@
 
     for (let i = 1; i <= 10; i++) {
       let answer = document.querySelector(`input[name="q${i}"]:checked`);
-      if (answer && categories.hasOwnProperty(answer.value)) {
+      if (!answer) {
+        alert("Please answer all questions before submitting.");
+        return;
+      }
+      if (answer.value !== "Other") {
+        allDisagree = false;
+      }
+      if (categories.hasOwnProperty(answer.value)) {
         categories[answer.value]++;
       }
     }
 
-    // find top category
+    if (allDisagree) {
+      alert("No suggestion, please answer the assessment correctly.");
+      return;
+    }
+
     let topCategory = Object.keys(categories).reduce((a, b) =>
       categories[a] > categories[b] ? a : b
     );
 
-    // map category to course
     let courseMap = {
       Realistic: "Engineering / Architecture / Electronics / Industrial Technology",
       Investigative: "Biology / Chemistry / Physics / Mathematics / Information Technology",
@@ -139,16 +149,12 @@
 
     let suggestedCourse = courseMap[topCategory] || "General Studies";
 
-    // save result to localStorage under current user
     saveResult(suggestedCourse);
 
     alert(`The course that fits for you: ${suggestedCourse}`);
-    window.location.href = "result.html"; // redirect to results page
+    window.location.href = "result.html";
   });
-</script>
+  </script>
 </body>
 </html>
-
-
-
 
