@@ -75,27 +75,27 @@
   const explanations = {
     Realistic: {
       desc: "You enjoy hands-on, practical, and technical activities. You prefer working with tools, machines, or physical materials.",
-      careers: ["Engineer", "Technician", "Electrician", "Architect", "Industrial Technologist"]
+      careers: ["Engineering", "Technical Engineering", "Electrical Engineering", "Architecture", "Industrial Technology"]
     },
     Investigative: {
       desc: "You enjoy analyzing problems, researching information, and discovering how things work through logic and data.",
-      careers: ["IT Specialist", "Data Analyst", "Scientist", "Researcher", "Software Developer"]
+      careers: ["Information Technology", "Data Science", "Biology", "Computer Science", "Engineering"]
     },
     Artistic: {
       desc: "You are creative, imaginative, and expressive. You enjoy originality and artistic freedom.",
-      careers: ["Graphic Designer", "Multimedia Artist", "Writer", "Animator", "Content Creator"]
+      careers: ["Multimedia Art", "Creative Writing", "Fine Arts", "Interior Design"]
     },
     Social: {
       desc: "You enjoy helping, teaching, and supporting others. You value meaningful interaction and service.",
-      careers: ["Teacher", "Nurse", "Psychologist", "Social Worker", "Tourism Officer"]
+      careers: ["Education", "Nursing", "Psychology", "Social Worker", "Tourism Managerment", "Hospitality Management"]
     },
     Enterprising: {
       desc: "You enjoy leading, persuading, and influencing others. You are confident in communication and decision-making.",
-      careers: ["Entrepreneur", "Marketing Manager", "Sales Executive", "Project Manager", "Business Consultant"]
+      careers: ["Entrepreneurship", "Marketing", "Business Administration", "Project Management", "Finance", "Economics"]
     },
     Conventional: {
       desc: "You prefer structure, organization, and accuracy. You enjoy working with data, records, and systems.",
-      careers: ["Accountant", "Finance Officer", "Office Administrator", "Bank Clerk", "Records Officer"]
+      careers: ["Accounting", "Finance", "Office Administration", "Business Administration"]
     }
   };
 
@@ -135,7 +135,7 @@
           <div class="bar-fill" style="width:${percent}%"></div>
         </div>
 
-        <strong>Suggested Careers:</strong><br>
+        <strong>Suggested Course:</strong><br>
         ${explanations[item.type].careers
           .map(c => `<span class="tag">${c}</span>`)
           .join("")}
