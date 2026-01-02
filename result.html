@@ -5,54 +5,163 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Results - Course Finder</title>
   <link rel="stylesheet" href="style.css">
+
+  <style>
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+
+    .bar {
+      background: #e0e0e0;
+      border-radius: 10px;
+      height: 16px;
+      overflow: hidden;
+      margin: 8px 0 14px;
+    }
+
+    .bar-fill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, #4e73df, #1cc88a);
+      transition: width 1s ease;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #f1f3f6;
+      padding: 6px 12px;
+      border-radius: 20px;
+      margin: 4px 4px 0 0;
+      font-size: 14px;
+    }
+
+    .history li {
+      margin-bottom: 8px;
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Your Results</h1>
-    <h2>Welcome, <span id="displayUser"></span>!</h2>
-    
+
+<div class="container">
+  <h1>Your Results</h1>
+  <h2>Welcome, <span id="displayUser"></span>!</h2>
+
+  <!-- Latest Result -->
+  <div id="latestResult"></div>
+
+  <!-- Result History -->
+  <div class="card">
+    <h3>Assessment History</h3>
     <div id="resultsList"></div>
-    
-    <br>
-    <a href="assessment.html" class="btn">Take Assessment Again</a>
-    <a href="index.html" class="btn" onclick="logout()">Logout</a>
   </div>
 
-  <script>
-    const currentUser = localStorage.getItem("currentUser");
+  <a href="assessment.html" class="btn">Take Assessment Again</a>
+  <a href="index.html" class="btn" onclick="logout()">Logout</a>
+</div>
 
-    if (!currentUser) {
-      window.location.href = "index.html"; // force login if not logged in
-    } else {
-      document.getElementById("displayUser").innerText = currentUser;
+<script>
+  const currentUser = localStorage.getItem("currentUser");
+
+  if (!currentUser) {
+    window.location.href = "index.html";
+  } else {
+    document.getElementById("displayUser").innerText = currentUser;
+  }
+
+  const explanations = {
+    Realistic: {
+      desc: "You enjoy hands-on, practical, and technical activities. You prefer working with tools, machines, or physical materials.",
+      careers: ["Engineer", "Technician", "Electrician", "Architect", "Industrial Technologist"]
+    },
+    Investigative: {
+      desc: "You enjoy analyzing problems, researching information, and discovering how things work through logic and data.",
+      careers: ["IT Specialist", "Data Analyst", "Scientist", "Researcher", "Software Developer"]
+    },
+    Artistic: {
+      desc: "You are creative, imaginative, and expressive. You enjoy originality and artistic freedom.",
+      careers: ["Graphic Designer", "Multimedia Artist", "Writer", "Animator", "Content Creator"]
+    },
+    Social: {
+      desc: "You enjoy helping, teaching, and supporting others. You value meaningful interaction and service.",
+      careers: ["Teacher", "Nurse", "Psychologist", "Social Worker", "Tourism Officer"]
+    },
+    Enterprising: {
+      desc: "You enjoy leading, persuading, and influencing others. You are confident in communication and decision-making.",
+      careers: ["Entrepreneur", "Marketing Manager", "Sales Executive", "Project Manager", "Business Consultant"]
+    },
+    Conventional: {
+      desc: "You prefer structure, organization, and accuracy. You enjoy working with data, records, and systems.",
+      careers: ["Accountant", "Finance Officer", "Office Administrator", "Bank Clerk", "Records Officer"]
+    }
+  };
+
+  function loadResults() {
+    const userResults = JSON.parse(localStorage.getItem(currentUser)) || [];
+    const resultsDiv = document.getElementById("resultsList");
+    const latestDiv = document.getElementById("latestResult");
+
+    if (userResults.length === 0) {
+      latestDiv.innerHTML =
+        "<p>No results found yet. Please take the assessment.</p>";
+      resultsDiv.innerHTML = "";
+      return;
     }
 
-    function loadResults() {
-      let userResults = JSON.parse(localStorage.getItem(currentUser)) || [];
+    // ===== LATEST RESULT =====
+    const latest = userResults[userResults.length - 1];
+    const scores = latest.scores;
+    const top3 = latest.top3;
 
-      const resultsDiv = document.getElementById("resultsList");
+    const maxScore = Math.max(...Object.values(scores));
 
-      if (userResults.length === 0) {
-        resultsDiv.innerHTML = "<p>No results found yet. Please take the assessment.</p>";
-        return;
-      }
+    let latestHTML = `
+      <div class="card">
+        <h3>Latest Assessment Result</h3>
+        <p><strong>Date:</strong> ${latest.date}</p>
+    `;
 
-      let html = "<ul>";
-      userResults.forEach(r => {
-        html += `<li><strong>${r.date} ${r.time}</strong>: ${r.course}</li>`;
-      });
-      html += "</ul>";
+    top3.forEach((item, index) => {
+      const percent = Math.round((scores[item.type] / maxScore) * 100);
 
-      resultsDiv.innerHTML = html;
-    }
+      latestHTML += `
+        <h4>${index + 1}. ${item.type} Type</h4>
+        <p>${explanations[item.type].desc}</p>
 
-    function logout() {
-      localStorage.removeItem("currentUser");
-    }
+        <div class="bar">
+          <div class="bar-fill" style="width:${percent}%"></div>
+        </div>
 
-    // load results on page load
-    loadResults();
-  </script>
+        <strong>Suggested Careers:</strong><br>
+        ${explanations[item.type].careers
+          .map(c => `<span class="tag">${c}</span>`)
+          .join("")}
+        <hr>
+      `;
+    });
+
+    latestHTML += `</div>`;
+    latestDiv.innerHTML = latestHTML;
+
+    // ===== HISTORY =====
+    let historyHTML = "<ul class='history'>";
+    userResults.forEach(r => {
+      historyHTML += `<li><strong>${r.date}</strong></li>`;
+    });
+    historyHTML += "</ul>";
+
+    resultsDiv.innerHTML = historyHTML;
+  }
+
+  function logout() {
+    localStorage.removeItem("currentUser");
+  }
+
+  loadResults();
+</script>
+
 </body>
 </html>
-
