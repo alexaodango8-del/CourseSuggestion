@@ -9,152 +9,240 @@
 <body>
   <div class="container">
     <h1>Course Assessment</h1>
+
     <form id="assessmentForm">
-      <h1>Welcome, <span id="displayUser"></span>!</h1>
-      
-      <p>1. I enjoy working with tools, machines, or fixing things.</p>
+      <h2>Welcome, <span id="displayUser"></span>!</h2>
+
+      <!-- R – Realistic -->
+      <h3>R – Realistic (Hands-on, technical, mechanical)</h3>
+
+      <p>1. I enjoy fixing, building, or working with tools, machines, or physical materials.</p>
       <label><input type="radio" name="q1" value="Realistic"> Strongly Agree</label>
       <label><input type="radio" name="q1" value="Realistic"> Agree</label>
       <label><input type="radio" name="q1" value="Neutral"> Neutral</label>
       <label><input type="radio" name="q1" value="Other"> Disagree</label>
+      <label><input type="radio" name="q1" value="Other"> Strongly Disagree</label>
 
-      <p>2. I like solving puzzles, analyzing data, or doing experiments.</p>
-      <label><input type="radio" name="q2" value="Investigative"> Strongly Agree</label>
-      <label><input type="radio" name="q2" value="Investigative"> Agree</label>
+      <p>2. I enjoy hands-on activities like assembling objects, repairing items, or doing physical projects.</p>
+      <label><input type="radio" name="q2" value="Realistic"> Strongly Agree</label>
+      <label><input type="radio" name="q2" value="Realistic"> Agree</label>
       <label><input type="radio" name="q2" value="Neutral"> Neutral</label>
       <label><input type="radio" name="q2" value="Other"> Disagree</label>
+      <label><input type="radio" name="q2" value="Other"> Strongly Disagree</label>
 
-      <p>3. I like writing stories, drawing, singing, or creating something new.</p>
-      <label><input type="radio" name="q3" value="Artistic"> Strongly Agree</label>
-      <label><input type="radio" name="q3" value="Artistic"> Agree</label>
+      <p>3. I enjoy outdoor, mechanical, or technical tasks rather than office-type activities.</p>
+      <label><input type="radio" name="q3" value="Realistic"> Strongly Agree</label>
+      <label><input type="radio" name="q3" value="Realistic"> Agree</label>
       <label><input type="radio" name="q3" value="Neutral"> Neutral</label>
       <label><input type="radio" name="q3" value="Other"> Disagree</label>
+      <label><input type="radio" name="q3" value="Other"> Strongly Disagree</label>
 
-      <p>4. I enjoy helping others, teaching, or volunteering.</p>
-      <label><input type="radio" name="q4" value="Social"> Strongly Agree</label>
-      <label><input type="radio" name="q4" value="Social"> Agree</label>
+      <!-- I – Investigative -->
+      <h3>I – Investigative (Analytical, research, problem-solving)</h3>
+
+      <p>4. I like exploring how things work by observing, analyzing, or experimenting.</p>
+      <label><input type="radio" name="q4" value="Investigative"> Strongly Agree</label>
+      <label><input type="radio" name="q4" value="Investigative"> Agree</label>
       <label><input type="radio" name="q4" value="Neutral"> Neutral</label>
       <label><input type="radio" name="q4" value="Other"> Disagree</label>
+      <label><input type="radio" name="q4" value="Other"> Strongly Disagree</label>
 
-      <p>5. I like leading teams, selling products, or persuading people.</p>
-      <label><input type="radio" name="q5" value="Enterprising"> Strongly Agree</label>
-      <label><input type="radio" name="q5" value="Enterprising"> Agree</label>
+      <p>5. I rely on logic and facts when solving problems or making decisions.</p>
+      <label><input type="radio" name="q5" value="Investigative"> Strongly Agree</label>
+      <label><input type="radio" name="q5" value="Investigative"> Agree</label>
       <label><input type="radio" name="q5" value="Neutral"> Neutral</label>
       <label><input type="radio" name="q5" value="Other"> Disagree</label>
+      <label><input type="radio" name="q5" value="Other"> Strongly Disagree</label>
 
-      <p>6. I prefer organizing files, working with numbers, or following clear rules.</p>
-      <label><input type="radio" name="q6" value="Conventional"> Strongly Agree</label>
-      <label><input type="radio" name="q6" value="Conventional"> Agree</label>
+      <p>6. I am interested in science-related activities, such as researching, investigating, or studying patterns.</p>
+      <label><input type="radio" name="q6" value="Investigative"> Strongly Agree</label>
+      <label><input type="radio" name="q6" value="Investigative"> Agree</label>
       <label><input type="radio" name="q6" value="Neutral"> Neutral</label>
       <label><input type="radio" name="q6" value="Other"> Disagree</label>
+      <label><input type="radio" name="q6" value="Other"> Strongly Disagree</label>
 
-      <p>7. I get more energy from being with people than being alone.</p>
-      <label><input type="radio" name="q7" value="Social"> Strongly Agree</label>
-      <label><input type="radio" name="q7" value="Social"> Agree</label>
+      <p>7. I like solving puzzles, answering complex questions, or exploring new knowledge.</p>
+      <label><input type="radio" name="q7" value="Investigative"> Strongly Agree</label>
+      <label><input type="radio" name="q7" value="Investigative"> Agree</label>
       <label><input type="radio" name="q7" value="Neutral"> Neutral</label>
       <label><input type="radio" name="q7" value="Other"> Disagree</label>
+      <label><input type="radio" name="q7" value="Other"> Strongly Disagree</label>
 
-      <p>8. I make decisions based more on logic than emotions.</p>
-      <label><input type="radio" name="q8" value="Investigative"> Strongly Agree</label>
-      <label><input type="radio" name="q8" value="Investigative"> Agree</label>
+      <!-- A – Artistic -->
+      <h3>A – Artistic (Creative, expressive, imaginative)</h3>
+
+      <p>8. I feel happiest when I can create something original, such as art, writing, or designs.</p>
+      <label><input type="radio" name="q8" value="Artistic"> Strongly Agree</label>
+      <label><input type="radio" name="q8" value="Artistic"> Agree</label>
       <label><input type="radio" name="q8" value="Neutral"> Neutral</label>
       <label><input type="radio" name="q8" value="Other"> Disagree</label>
+      <label><input type="radio" name="q8" value="Other"> Strongly Disagree</label>
 
-      <p>9. I like planning things step by step instead of being spontaneous.</p>
-      <label><input type="radio" name="q9" value="Conventional"> Strongly Agree</label>
-      <label><input type="radio" name="q9" value="Conventional"> Agree</label>
+      <p>9. I often think about new possibilities, ideas, or long-term goals for the future.</p>
+      <label><input type="radio" name="q9" value="Artistic"> Strongly Agree</label>
+      <label><input type="radio" name="q9" value="Artistic"> Agree</label>
       <label><input type="radio" name="q9" value="Neutral"> Neutral</label>
       <label><input type="radio" name="q9" value="Other"> Disagree</label>
+      <label><input type="radio" name="q9" value="Other"> Strongly Disagree</label>
 
-      <p>10. I often imagine new ideas and possibilities for the future.</p>
+      <p>10. I enjoy expressing myself through artistic, musical, or imaginative work.</p>
       <label><input type="radio" name="q10" value="Artistic"> Strongly Agree</label>
       <label><input type="radio" name="q10" value="Artistic"> Agree</label>
       <label><input type="radio" name="q10" value="Neutral"> Neutral</label>
       <label><input type="radio" name="q10" value="Other"> Disagree</label>
+      <label><input type="radio" name="q10" value="Other"> Strongly Disagree</label>
+
+      <p>11. I enjoy projects that allow creativity, such as designing, storytelling, or crafting.</p>
+      <label><input type="radio" name="q11" value="Artistic"> Strongly Agree</label>
+      <label><input type="radio" name="q11" value="Artistic"> Agree</label>
+      <label><input type="radio" name="q11" value="Neutral"> Neutral</label>
+      <label><input type="radio" name="q11" value="Other"> Disagree</label>
+      <label><input type="radio" name="q11" value="Other"> Strongly Disagree</label>
+
+      <!-- S – Social -->
+      <h3>S – Social (Helping, teaching, supporting people)</h3>
+
+      <p>12. I enjoy helping, teaching, or supporting people when they need assistance.</p>
+      <label><input type="radio" name="q12" value="Social"> Strongly Agree</label>
+      <label><input type="radio" name="q12" value="Social"> Agree</label>
+      <label><input type="radio" name="q12" value="Neutral"> Neutral</label>
+      <label><input type="radio" name="q12" value="Other"> Disagree</label>
+      <label><input type="radio" name="q12" value="Other"> Strongly Disagree</label>
+
+      <p>13. I gain more energy from being around people than from being alone.</p>
+      <label><input type="radio" name="q13" value="Social"> Strongly Agree</label>
+      <label><input type="radio" name="q13" value="Social"> Agree</label>
+      <label><input type="radio" name="q13" value="Neutral"> Neutral</label>
+      <label><input type="radio" name="q13" value="Other"> Disagree</label>
+      <label><input type="radio" name="q13" value="Other"> Strongly Disagree</label>
+
+      <p>14. I feel fulfilled when I can help improve other people’s well-being or guide them.</p>
+      <label><input type="radio" name="q14" value="Social"> Strongly Agree</label>
+      <label><input type="radio" name="q14" value="Social"> Agree</label>
+      <label><input type="radio" name="q14" value="Neutral"> Neutral</label>
+      <label><input type="radio" name="q14" value="Other"> Disagree</label>
+      <label><input type="radio" name="q14" value="Other"> Strongly Disagree</label>
+
+      <!-- E – Enterprising -->
+      <h3>E – Enterprising (Leading, promoting, persuading)</h3>
+
+      <p>15. I am comfortable talking to others, convincing them, or promoting ideas.</p>
+      <label><input type="radio" name="q15" value="Enterprising"> Strongly Agree</label>
+      <label><input type="radio" name="q15" value="Enterprising"> Agree</label>
+      <label><input type="radio" name="q15" value="Neutral"> Neutral</label>
+      <label><input type="radio" name="q15" value="Other"> Disagree</label>
+      <label><input type="radio" name="q15" value="Other"> Strongly Disagree</label>
+
+      <p>16. I feel confident taking the lead in a group or making decisions for a team.</p>
+      <label><input type="radio" name="q16" value="Enterprising"> Strongly Agree</label>
+      <label><input type="radio" name="q16" value="Enterprising"> Agree</label>
+      <label><input type="radio" name="q16" value="Neutral"> Neutral</label>
+      <label><input type="radio" name="q16" value="Other"> Disagree</label>
+      <label><input type="radio" name="q16" value="Other"> Strongly Disagree</label>
+
+      <p>17. I am comfortable speaking in front of others or presenting ideas.</p>
+      <label><input type="radio" name="q17" value="Enterprising"> Strongly Agree</label>
+      <label><input type="radio" name="q17" value="Enterprising"> Agree</label>
+      <label><input type="radio" name="q17" value="Neutral"> Neutral</label>
+      <label><input type="radio" name="q17" value="Other"> Disagree</label>
+      <label><input type="radio" name="q17" value="Other"> Strongly Disagree</label>
+
+      <!-- C – Conventional -->
+      <h3>C – Conventional (Organizing, record-keeping, detail-focused)</h3>
+
+      <p>18. I prefer tasks that require order, accuracy, and following step-by-step procedures.</p>
+      <label><input type="radio" name="q18" value="Conventional"> Strongly Agree</label>
+      <label><input type="radio" name="q18" value="Conventional"> Agree</label>
+      <label><input type="radio" name="q18" value="Neutral"> Neutral</label>
+      <label><input type="radio" name="q18" value="Other"> Disagree</label>
+      <label><input type="radio" name="q18" value="Other"> Strongly Disagree</label>
+
+      <p>19. I like organizing events, schedules, or tasks to keep things running smoothly.</p>
+      <label><input type="radio" name="q19" value="Conventional"> Strongly Agree</label>
+      <label><input type="radio" name="q19" value="Conventional"> Agree</label>
+      <label><input type="radio" name="q19" value="Neutral"> Neutral</label>
+      <label><input type="radio" name="q19" value="Other"> Disagree</label>
+      <label><input type="radio" name="q19" value="Other"> Strongly Disagree</label>
+
+      <p>20. I like working with numbers, organizing information, or keeping records.</p>
+      <label><input type="radio" name="q20" value="Conventional"> Strongly Agree</label>
+      <label><input type="radio" name="q20" value="Conventional"> Agree</label>
+      <label><input type="radio" name="q20" value="Neutral"> Neutral</label>
+      <label><input type="radio" name="q20" value="Other"> Disagree</label>
+      <label><input type="radio" name="q20" value="Other"> Strongly Disagree</label>
 
       <br><br>
       <button type="submit" class="btn">Submit</button>
     </form>
+
     <a href="index.html" class="btn">Back to Home</a>
   </div>
 
   <script>
-  const form = document.getElementById("assessmentForm");
-  const currentUser = localStorage.getItem("currentUser");
+    const form = document.getElementById("assessmentForm");
+    const currentUser = localStorage.getItem("currentUser");
 
-  if (!currentUser) {
-    window.location.href = "index.html"; // force login if no user
-  } else {
-    document.getElementById("displayUser").innerText = currentUser;
-  }
-
-  function saveResult(suggestedCourse) {
-    let now = new Date();
-    let result = {
-      date: now.toLocaleDateString(),
-      time: now.toLocaleTimeString(),
-      course: suggestedCourse
-    };
-
-    // save results for each user
-    let userResults = JSON.parse(localStorage.getItem(currentUser)) || [];
-    userResults.push(result);
-    localStorage.setItem(currentUser, JSON.stringify(userResults));
-  }
-
-  form.addEventListener("submit", function(e) {
-    e.preventDefault();
-
-    let allDisagree = true; // flag for all "Disagree"
-    let categories = {
-      Realistic: 0,
-      Investigative: 0,
-      Artistic: 0,
-      Social: 0,
-      Enterprising: 0,
-      Conventional: 0
-    };
-
-    for (let i = 1; i <= 10; i++) {
-      let answer = document.querySelector(`input[name="q${i}"]:checked`);
-      if (!answer) {
-        alert("Please answer all questions before submitting.");
-        return;
-      }
-      if (answer.value !== "Other") {
-        allDisagree = false;
-      }
-      if (categories.hasOwnProperty(answer.value)) {
-        categories[answer.value]++;
-      }
+    if (!currentUser) {
+      window.location.href = "index.html";
+    } else {
+      document.getElementById("displayUser").innerText = currentUser;
     }
 
-    if (allDisagree) {
-      alert("No suggestion, please answer the assessment correctly.");
-      return;
+    function saveResult(course) {
+      const now = new Date();
+      const result = {
+        date: now.toLocaleDateString(),
+        time: now.toLocaleTimeString(),
+        course: course
+      };
+
+      const userResults = JSON.parse(localStorage.getItem(currentUser)) || [];
+      userResults.push(result);
+      localStorage.setItem(currentUser, JSON.stringify(userResults));
     }
 
-    let topCategory = Object.keys(categories).reduce((a, b) =>
-      categories[a] > categories[b] ? a : b
-    );
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
 
-    let courseMap = {
-      Realistic: "Engineering / Architecture / Electronics / Industrial Technology",
-      Investigative: "Biology / Chemistry / Physics / Mathematics / Information Technology",
-      Artistic: "Multimedia Arts / Communication / Journalism / Fine Arts / Creative Writing",
-      Social: "Education / Nursing / Social Work / Psychology / Tourism / Hospitality / Public Relations",
-      Enterprising: "Business Administration / Marketing / Entrepreneurship / Public Administration",
-      Conventional: "Accountancy / Finance / Office Administration / Criminology / Library Science"
-    };
+      let categories = {
+        Realistic: 0,
+        Investigative: 0,
+        Artistic: 0,
+        Social: 0,
+        Enterprising: 0,
+        Conventional: 0
+      };
 
-    let suggestedCourse = courseMap[topCategory] || "General Studies";
+      for (let i = 1; i <= 20; i++) {
+        const answer = document.querySelector(`input[name="q${i}"]:checked`);
+        if (!answer) {
+          alert("Please answer all questions.");
+          return;
+        }
+        if (categories.hasOwnProperty(answer.value)) {
+          categories[answer.value]++;
+        }
+      }
 
-    saveResult(suggestedCourse);
+      const topCategory = Object.keys(categories).reduce((a, b) =>
+        categories[a] > categories[b] ? a : b
+      );
 
-    alert(`The course that fits for you: ${suggestedCourse}`);
-    window.location.href = "result.html";
-  });
+      const courseMap = {
+        Realistic: "Engineering / Architecture / Industrial Technology",
+        Investigative: "IT / Biology / Chemistry / Mathematics / Data Science",
+        Artistic: "Multimedia Arts / Communication / Fine Arts",
+        Social: "Education / Nursing / Psychology / Tourism",
+        Enterprising: "Business Administration / Marketing / Entrepreneurship",
+        Conventional: "Accountancy / Finance / Office Administration"
+      };
+
+      const suggestedCourse = courseMap[topCategory];
+      saveResult(suggestedCourse);
+
+      alert(`The course that fits you best is: ${suggestedCourse}`);
+      window.location.href = "result.html";
+    });
   </script>
 </body>
 </html>
-
